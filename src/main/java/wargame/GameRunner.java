@@ -23,7 +23,7 @@ public class GameRunner {
             }
         }
         catch(Exception e){
-            gameReporter.printTurn("Please specify a valid number of players.");
+            gameReporter.printTurn("Please specify a valid number of players (2-4).");
             return;
         }
 
