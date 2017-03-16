@@ -19,3 +19,6 @@ In the build directory created by the gradle build, there should be a jarfile.  
 e.g., 
 
     java -jar build\libs\wargame-1.0-3.jar 4
+
+## Rules
+This code conforms to the rules described at https://www.pagat.com/war/war.html
