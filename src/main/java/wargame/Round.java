@@ -86,10 +86,10 @@ public class Round {
         return cardsWon;
     }
 
-    private boolean isWar(List<Play> currentRound){
+    private boolean isWar(LinkedList<Play> currentRound){
         Collections.sort(currentRound);
         // it's only a war if the highest value is a duplicate.
-        return Collections.frequency(currentRound, currentRound.get(currentRound.size()-1)) > 1;
+        return Collections.frequency(currentRound, currentRound.getLast()) > 1;
     }
 
     /*
