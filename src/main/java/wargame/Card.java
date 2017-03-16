@@ -6,7 +6,6 @@ package wargame;
 public class Card {
 
     private int value;
-
     private String displayValue;
 
     public Card(int value, String displayValue){
@@ -28,5 +27,20 @@ public class Card {
                 "value=" + value +
                 ", displayValue='" + displayValue + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Card card = (Card) o;
+
+        return value == card.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return value;
     }
 }

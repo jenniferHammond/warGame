@@ -9,7 +9,7 @@ public class GameRunner {
         IGameReporter gameReporter = new SystemOutGameReporter();
 
         if(args.length < 1) {
-            gameReporter.printTurn("Please specify number of players.");
+            gameReporter.print("Please specify number of players.");
             return;
         }
 
@@ -23,10 +23,10 @@ public class GameRunner {
             }
         }
         catch(Exception e){
-            gameReporter.printTurn("Please specify a valid number of players (2-4).");
+            gameReporter.print("Please specify a valid number of players (2-4).");
             return;
         }
 
-        new Game(gameReporter).Play(numPlayers);
+        new Game(gameReporter).PlayNewGame(numPlayers);
     }
 }

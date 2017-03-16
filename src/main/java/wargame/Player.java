@@ -25,8 +25,8 @@ public class Player {
         return cards.removeFirst();
     }
 
-    public void addCardsToHand(Collection<Card> cards){
-        cards.addAll(cards);
+    public void addCardsToHand(Collection<Card> newCards){
+        cards.addAll(newCards);
     }
 
     public void addCardToHand(Card card){
@@ -54,9 +54,9 @@ public class Player {
     }
 
     /*
-         * Useful for tests, but this shouldn't be used by the game itself.
-         * Are you out of cards, or aren't you?
-         */
+     * Useful for tests, but this shouldn't be used by the game itself.
+     * Are you out of cards, or aren't you?
+     */
     int handSize() {
         return cards.size();
     }

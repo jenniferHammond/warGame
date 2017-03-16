@@ -17,8 +17,8 @@ public class Dealer {
         int cardsPerPlayer = cardsPerPlayer(numPlayers);
         
         List<Player> players = new ArrayList<Player>(cardsPerPlayer);
-        for(int i=0; i<numPlayers; i++){
-            players.add(new Player());
+        for(int i=1; i<=numPlayers; i++){
+            players.add(new Player(i));
         }
         
         for(int i = 0; i<cardsPerPlayer; i++){

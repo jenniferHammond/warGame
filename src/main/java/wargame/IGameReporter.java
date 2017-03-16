@@ -8,5 +8,5 @@ public interface IGameReporter {
     /*
      * Prints the output of a turn to an output.
      */
-    void printTurn(String turn);
+    void print(String turn);
 }
