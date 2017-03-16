@@ -89,18 +89,30 @@ public class Round {
     }
 
     private boolean isWar(List<Play> currentRound){
-        return new HashSet(currentRound).size() != currentRound.size();
+        Collections.sort(currentRound);
+        // it's only a war if the highest value is a duplicate.
+        return Collections.frequency(currentRound, currentRound.get(currentRound.size()-1)) > 1;
     }
 
     /*
-     * From a list of sorted plays, finds the plays with the same value.
+     * Finds the players who should continue in the war.
+     * If there's a war, and there are three or four players, everyone gets to
+     * play at war, even if they didn't win, according to
+     * https://www.pagat.com/war/war.html
      */
     private List<Player> warringPlayers(List<Play> plays){
         List<Player> warringPlayers = new ArrayList<Player>();
 
-        for(Play play: plays){
-            if(Collections.frequency(plays, play) > 1){
+        if(plays.size() > 2){
+            for(Play play: plays){
                 warringPlayers.add(play.getPlayer());
+            }
+        }
+        else {
+            for (Play play : plays) {
+                if (Collections.frequency(plays, play) > 1) {
+                    warringPlayers.add(play.getPlayer());
+                }
             }
         }
         return warringPlayers;
