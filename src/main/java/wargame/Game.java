@@ -8,6 +8,8 @@ import java.util.List;
 public class Game {
     private IGameReporter gameReporter;
 
+    private List<Player> activePlayers;
+
     public Game(IGameReporter gameReporter){
         this.gameReporter = gameReporter;
     }
@@ -16,8 +18,8 @@ public class Game {
         gameReporter.printTurn("This is war!");
         gameReporter.printTurn("Generating war game for " + numPlayers + " players.");
 
-        List<Hand> hands = new Dealer().deal(numPlayers);
+        activePlayers = new Dealer().deal(numPlayers);
 
-        gameReporter.printTurn("Generated hands for " + numPlayers + " players.");
+        gameReporter.printTurn("Starting game for " + numPlayers + " players.");
     }
 }

@@ -11,23 +11,23 @@ public class Dealer {
      /*
      * return a given number of hands from a new deck.
      */
-    public List<Hand> deal(int numPlayers){
+    public List<Player> deal(int numPlayers){
         List<Card> deck = newDeck();
 
         int cardsPerPlayer = cardsPerPlayer(numPlayers);
         
-        List<Hand> hands = new ArrayList<Hand>(cardsPerPlayer);
+        List<Player> players = new ArrayList<Player>(cardsPerPlayer);
         for(int i=0; i<numPlayers; i++){
-            hands.add(new Hand());
+            players.add(new Player());
         }
         
         for(int i = 0; i<cardsPerPlayer; i++){
-            for (Hand hand : hands) {
-                hand.addCardToHand(deck.remove(0));
+            for (Player player : players) {
+                player.addCardToHand(deck.remove(0));
             }
         }
 
-        return hands;
+        return players;
     }
 
     /*
