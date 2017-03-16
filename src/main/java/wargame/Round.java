@@ -13,42 +13,64 @@ public class Round {
         this.reporter = reporter;
     }
 
-    public RoundWinner playOneRound(List<Player> players) {
-        RoundWinner roundWinner = new RoundWinner();
-        return playOneRound(players, roundWinner);
+    public RoundResults playOneRound(List<Player> players) {
+        RoundResults roundResults = new RoundResults();
+        return playOneRound(players, roundResults);
     }
 
-    private RoundWinner playOneRound(List<Player> players, RoundWinner roundWinner){
+    private RoundResults playOneRound(List<Player> players, RoundResults roundResults){
         LinkedList<Play> currentRound = new LinkedList<Play>();
         for (Player player : players) {
             // if player cannot play card, do not add them to the round.
             if(player.hasCards()) {
-                Play play = new Play(player, player.playCard());
-                currentRound.add(play);
-                reporter.print(play.toString());
+                if(player.hasCards()) {
+                    Play play = new Play(player, player.playCard());
+                    currentRound.add(play);
+                    reporter.print(play.toString());
+                }
             }
+        }
+
+        /*
+         * It's unlikely, but possible, that all players in the round have run out of cards.
+         * This is a draw.
+         */
+        if(currentRound.size() == 0){
+            for (Player player : players) {
+                roundResults.addWinner(player);
+            }
+            return roundResults;
         }
 
         if(isWar(currentRound)){
             // find players with equal cards
             List<Player> warringPlayers = warringPlayers(currentRound);
-            roundWinner.addCardsWon(getCardsForRound(currentRound));
+            roundResults.addCardsWon(getCardsForRound(currentRound));
 
             reporter.print("WAR breaks out between " + warringPlayers);
 
+            // all players must play one card face-down.
+            // if they have no cards, they'll be eliminated next go-round, so they
+            // can stay in the pool for now.
+            for(Player player: warringPlayers){
+                if(player.hasCards()){
+                    roundResults.addCardWon(player.playCard());
+                }
+            }
+
             // play another round with warring players
-            return playOneRound(warringPlayers, roundWinner);
+            return playOneRound(warringPlayers, roundResults);
         }
         else{
             Player winningPlayer = getWinningPlayer(currentRound);
-            roundWinner.setWinner(winningPlayer);
+            roundResults.addWinner(winningPlayer);
 
             // give cards to the winner and report back out
             List<Card> cardsWon = getCardsForRound(currentRound);
-            roundWinner.addCardsWon(cardsWon);
+            roundResults.addCardsWon(cardsWon);
         }
 
-        return roundWinner;
+        return roundResults;
     }
 
     private Player getWinningPlayer(LinkedList<Play> currentRound) {
