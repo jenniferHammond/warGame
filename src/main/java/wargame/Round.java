@@ -23,11 +23,9 @@ public class Round {
         for (Player player : players) {
             // if player cannot play card, do not add them to the round.
             if(player.hasCards()) {
-                if(player.hasCards()) {
                     Play play = new Play(player, player.playCard());
                     currentRound.add(play);
                     reporter.print(play.toString());
-                }
             }
         }
 
